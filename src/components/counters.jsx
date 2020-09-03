@@ -23,10 +23,11 @@ class Counters extends Component {
             <div>
                 {this.state.counters.map(counter => (
                     <Counter 
-                    key={counter.id} 
+                    key={counter.id}  // attribute used internally by react we cant use it
                     onDelete={this.handleDelete} 
-                    value={counter.value} 
-                    id = {counter.id}
+                    //value={counter.value} 
+                    //id = {counter.id}
+                    counter={counter} //value and id relaced by counter object for encapsulation
                     />
                     ))}
             </div>
