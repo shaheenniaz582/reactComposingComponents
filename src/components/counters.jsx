@@ -6,10 +6,31 @@ class Counters extends Component {
         //initializing counters property to render counters dynamically
         counters: [ 
             {id: 1, value: 4},
-            {id: 2, value: 3},
-            {id: 3, value: 1},
+            {id: 2, value: 0},
+            {id: 3, value: 0},
             {id: 4, value: 0}
         ]
+    };
+    // event handler for parent component event raised from child component
+    handleIncrement = counter => {
+        //console.log(counter);
+        const counters = [...this.state.counters]; //spread operator used to clone the counters array
+        //just to test
+        // counters[0].value++;
+        // console.log(this.state.counters[0]);
+        const index = counters.indexOf(counter);
+        counter[index] = {...counter}; //to have different object than in state
+        counters[index].value++;
+        this.setState({ counters });
+
+    };
+    // event handler for understanding of single source of truth
+    handleReset = () => {
+        const counters = this.state.counters.map( c=> {
+            c.value = 0;
+            return c;
+        });
+        this.setState({ counters });
     };
     // event hanler in parent Component event raised by child component
     handleDelete = counterId => {
@@ -21,13 +42,17 @@ class Counters extends Component {
     render() { 
         return ( 
             <div>
+                <button 
+                    onClick={this.handleReset}
+                    className="btn btn-primary btn-sm m-2">Reset</button>
                 {this.state.counters.map(counter => (
                     <Counter 
                     key={counter.id}  // attribute used internally by react we cant use it
+                    onIncrement = {this.handleIncrement}
                     onDelete={this.handleDelete} 
                     //value={counter.value} 
                     //id = {counter.id}
-                    counter={counter} //value and id relaced by counter object for encapsulation
+                    counter={counter} //value and id replaced by counter object for encapsulation
                     />
                     ))}
             </div>
