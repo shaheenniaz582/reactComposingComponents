@@ -28,6 +28,15 @@ class App extends Component {
       this.setState({ counters });
 
   };
+
+  handleDecrement = counter => {
+    const counters = [...this.state.counters]; //spread operator used to clone the counters array
+    const index = counters.indexOf(counter);
+    counter[index] = {...counter}; //to have different object than in state
+    counters[index].value--;
+    this.setState({ counters });
+ };
+
   // event handler for understanding of single source of truth
   handleReset = () => {
       const counters = this.state.counters.map( c=> {
@@ -55,6 +64,7 @@ class App extends Component {
           onReset={this.handleReset}
           onIncrement={this.handleIncrement}
           onDelete={this.handleDelete}
+          onDecrement={this.handleDecrement}
           />
       </main>
       </React.Fragment>

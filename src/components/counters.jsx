@@ -50,6 +50,7 @@ class Counters extends Component {
                     <Counter 
                     key={counter.id}  // attribute used internally by react we cant use it
                     onIncrement = {this.props.onIncrement}
+                    onDecrement = {this.props.onDecrement}
                     onDelete={this.props.onDelete} 
                     //value={counter.value} 
                     //id = {counter.id}
